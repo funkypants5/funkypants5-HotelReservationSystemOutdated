@@ -78,4 +78,6 @@ public class EmployeeSessionBean implements EmployeeSessionBeanRemote, EmployeeS
         Query query = em.createQuery("SELECT p FROM PartnerEntity p");
         return query.getResultList();
     }
+
+   
 }
