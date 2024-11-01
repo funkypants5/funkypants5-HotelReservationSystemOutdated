@@ -1,2 +1,0 @@
-# HotelReservationSystem 
-# PointOfSaleSystemWeb 
