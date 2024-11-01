@@ -105,7 +105,7 @@ public class MainApp {
     private void menuMain() {
         AccessRights accessright = this.employee.getAccessRightsEnum();
         if (accessright == AccessRights.SYSTEMADMIN) {
-            SystemAdministrationModule module = new SystemAdministrationModule(employeeSessionBeanRemote, partnerSessionBeanRemote);
+            SystemAdministrationModule module = new SystemAdministrationModule(employeeSessionBeanRemote, partnerSessionBeanRemote, this.employee);
             module.runModule();
         }
         else if (accessright == AccessRights.GUESTRELATIONOFFICER){
