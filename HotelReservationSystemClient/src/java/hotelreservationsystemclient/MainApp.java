@@ -14,6 +14,7 @@ import entity.EmployeeEntity;
 import entity.PartnerEntity;
 import java.util.Scanner;
 import util.enumeration.AccessRights;
+import util.exception.InvalidInputException;
 import util.exception.InvalidLoginCredentialException;
 
 /**

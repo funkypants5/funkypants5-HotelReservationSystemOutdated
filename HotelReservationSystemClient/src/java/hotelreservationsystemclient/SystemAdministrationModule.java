@@ -7,6 +7,8 @@ package hotelreservationsystemclient;
 import ejb.session.stateless.EmployeeSessionBeanRemote;
 import ejb.session.stateless.PartnerSessionBeanRemote;
 import entity.EmployeeEntity;
+import entity.PartnerEntity;
+import java.util.List;
 import java.util.Scanner;
 import util.enumeration.AccessRights;
 import util.exception.InvalidInputException;
@@ -31,9 +33,9 @@ public class SystemAdministrationModule {
         Scanner sc = new Scanner(System.in);
         int response;
         while (true) {
-            System.out.println("Welcome " + this.employee.getFirstName() + " to system administration \n");
+            System.out.println("\nHi " + this.employee.getFirstName() + " welcome to system administration \n");
             System.out.println("1: Create new employee account");
-            System.out.println("2: View all amployees");
+            System.out.println("2: View all employees");
             System.out.println("3: Create new partner account");
             System.out.println("4: View all partners");
             System.out.println("5: Logout");
@@ -41,9 +43,9 @@ public class SystemAdministrationModule {
             response = sc.nextInt();
 
             if (response == 1) {
-                createNewUser();
+                createNewEmployee();
             } else if (response == 2) {
-                viewAllUser();
+                viewAllEmployees();
             } else if (response == 3) {
                 createNewPartner();
             } else if (response == 4) {
@@ -52,16 +54,11 @@ public class SystemAdministrationModule {
                 break;
             } else {
                 System.out.println("Invalid input please key in a valid input");
-                try {
-                    Thread.sleep(2000); // Delay for 2000 milliseconds (2 seconds)
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
         }
     }
 
-    private void createNewUser() {
+    private void createNewEmployee() {
         try {
             Scanner sc = new Scanner(System.in);
             System.out.print("Enter first name: ");
@@ -112,28 +109,59 @@ public class SystemAdministrationModule {
 
             EmployeeEntity employee = new EmployeeEntity(firstName, lastName, accessRights, username, password);
             employeeSessionBeanRemote.createEmployee(employee);
-            System.out.println("Employee created successfully!");
+            System.out.println("\nEmployee created successfully! \n");
 
         } catch (InvalidInputException | IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: User already exists. Please use another username employee is given extra administarative rights. \n");
         }
     }
-    private void viewAllUser() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void viewAllEmployees() {
+        List<EmployeeEntity> listOfEmployees = employeeSessionBeanRemote.viewAllEmployees();
+        System.out.println("\nList of all employees \n");
+        int count = 0;
+        for(EmployeeEntity employee : listOfEmployees) {
+            count++;
+            System.out.println(count + ". " + employee);
+        }
     }
 
     private void createNewPartner() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try { 
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Please key in partner's email: ");
+            String email = sc.next().trim();
+            System.out.print("Please key in partner's password: ");
+            String password = sc.next().trim();
+            validatePassword(password);
+            System.out.print("Please key in partner's company name: ");
+            String name = sc.next().trim();
+            partnerSessionBeanRemote.createNewPartner(new PartnerEntity(email, password, name));
+            System.out.println("\nNew partner created!\n");
+        } catch (InvalidInputException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: Partner/Email address already exists");
+        }
+         
+         
     }
 
     private void viewAllPartners() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<PartnerEntity> listOfPartners = partnerSessionBeanRemote.viewAllPartners();
+        System.out.println("\nList of all partners \n");
+        int count = 0;
+        for(PartnerEntity partner : listOfPartners) {
+            count++;
+            System.out.println(count + ". " + partner);
+        }
     }
 
     private static void validateName(String name) throws InvalidInputException {
         if (name.isEmpty() || name.length() > 32) {
             throw new InvalidInputException("Name must be between 1 and 32 characters.");
-        }
+        } 
     }
 
     private static void validateUsername(String username) throws InvalidInputException {
@@ -147,6 +175,4 @@ public class SystemAdministrationModule {
             throw new InvalidInputException("Password must be at least 7 characters long.");
         }
     }
-
-    
 }

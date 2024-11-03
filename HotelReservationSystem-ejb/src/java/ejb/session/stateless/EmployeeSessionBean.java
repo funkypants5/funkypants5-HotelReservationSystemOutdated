@@ -4,7 +4,6 @@
  */
 package ejb.session.stateless;
 
-
 import entity.EmployeeEntity;
 import entity.PartnerEntity;
 import java.util.List;
@@ -12,7 +11,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder.In;
 import util.exception.EmployeeNotFoundException;
+import util.exception.InvalidInputException;
 import util.exception.InvalidLoginCredentialException;
 
 /**
@@ -31,31 +32,26 @@ public class EmployeeSessionBean implements EmployeeSessionBeanRemote, EmployeeS
     }
 
     @Override
+
     public List<EmployeeEntity> viewAllEmployees() {
         Query query = em.createQuery("SELECT e FROM EmployeeEntity e");
         return query.getResultList();
     }
-    
+
     @Override
-     public EmployeeEntity employeeLogin (String username, String password) throws InvalidLoginCredentialException{
-         try
-        {
+    public EmployeeEntity employeeLogin(String username, String password) throws InvalidLoginCredentialException {
+        try {
             EmployeeEntity employee = retrieveEmployeeByUsername(username);
-            
-            if(employee.getPassword().equals(password))
-            {               
+
+            if (employee.getPassword().equals(password)) {
                 return employee;
-            }
-            else
-            {
+            } else {
                 throw new InvalidLoginCredentialException("Username does not exist or invalid password!");
             }
-        }
-        catch(EmployeeNotFoundException ex)
-        {
+        } catch (EmployeeNotFoundException ex) {
             throw new InvalidLoginCredentialException("Username does not exist or invalid password!");
         }
-     }
+    }
 
     private EmployeeEntity retrieveEmployeeByUsername(String username) throws EmployeeNotFoundException {
         Query query = em.createQuery("SELECT e FROM EmployeeEntity e WHERE e.username = :username");
@@ -79,5 +75,4 @@ public class EmployeeSessionBean implements EmployeeSessionBeanRemote, EmployeeS
         return query.getResultList();
     }
 
-   
 }
