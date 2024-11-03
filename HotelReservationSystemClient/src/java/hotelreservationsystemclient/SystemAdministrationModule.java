@@ -118,6 +118,17 @@ public class SystemAdministrationModule {
             System.out.println("Error: " + e.getMessage());
         }
     }
+    private void viewAllUser() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void createNewPartner() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void viewAllPartners() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     private static void validateName(String name) throws InvalidInputException {
         if (name.isEmpty() || name.length() > 32) {
@@ -137,15 +148,5 @@ public class SystemAdministrationModule {
         }
     }
 
-    private void viewAllUser() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void createNewPartner() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void viewAllPartners() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 }
