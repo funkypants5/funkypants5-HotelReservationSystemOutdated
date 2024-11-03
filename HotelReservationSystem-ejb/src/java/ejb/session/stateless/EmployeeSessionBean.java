@@ -64,15 +64,4 @@ public class EmployeeSessionBean implements EmployeeSessionBeanRemote, EmployeeS
         }
     }
 
-    @Override
-    public void createNewPartner(PartnerEntity partner) {
-        em.persist(partner);
-    }
-
-    @Override
-    public List<PartnerEntity> viewAllPartners() {
-        Query query = em.createQuery("SELECT p FROM PartnerEntity p");
-        return query.getResultList();
-    }
-
 }
