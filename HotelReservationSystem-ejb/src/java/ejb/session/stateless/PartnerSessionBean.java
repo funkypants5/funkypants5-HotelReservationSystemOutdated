@@ -28,13 +28,6 @@ public class PartnerSessionBean implements PartnerSessionBeanRemote, PartnerSess
    
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-
-    public void persist(Object object) {
-        em.persist(object);
-    }
-
     @Override
     public List<PartnerEntity> viewAllPartners() {
         Query query = em.createQuery("SELECT p FROM PartnerEntity p");
