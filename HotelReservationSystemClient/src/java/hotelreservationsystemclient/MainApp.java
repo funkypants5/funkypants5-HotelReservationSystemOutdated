@@ -113,7 +113,7 @@ public class MainApp {
             FrontOfficeModule module = new FrontOfficeModule(guestSessionBeanRemote, bookingSessionBeanRemote);
             module.runModule();
         }
-        else if (accessright == AccessRights.OPERATIONMANAGER || accessright == AccessRights.SYSTEMMANAGER) {
+        else if (accessright == AccessRights.OPERATIONMANAGER || accessright == AccessRights.SALESMANAGER) {
             HotelOperationModule module = new HotelOperationModule(roomSessionBeanRemote, ratesSessionBeanRemote, roomTypeSessionBeanRemote);
             module.runModule();
         }

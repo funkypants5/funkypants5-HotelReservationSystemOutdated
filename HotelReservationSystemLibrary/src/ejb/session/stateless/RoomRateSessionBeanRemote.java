@@ -1,0 +1,23 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/J2EE/EJB30/SessionRemote.java to edit this template
+ */
+package ejb.session.stateless;
+
+import entity.RoomRateEntity;
+import java.util.List;
+import javax.ejb.Remote;
+
+/**
+ *
+ * @author admin
+ */
+@Remote
+public interface RoomRateSessionBeanRemote {
+    Long createRoomRate(RoomRateEntity roomRate);
+    RoomRateEntity retrieveRoomRateById(Long roomRateId);
+    List<RoomRateEntity> retrieveAllRoomRates();
+    void updateRoomRate(RoomRateEntity roomRate);
+    void deleteRoomRate(Long roomRateId);
+
+}

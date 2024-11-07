@@ -4,7 +4,14 @@
  */
 package ejb.session.stateless;
 
+import entity.RoomEntity;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.PersistenceContext;
+import util.exception.RoomNotFoundException;
 
 /**
  *
@@ -15,4 +22,5 @@ public class RoomSessionBean implements RoomSessionBeanRemote, RoomSessionBeanLo
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+
 }

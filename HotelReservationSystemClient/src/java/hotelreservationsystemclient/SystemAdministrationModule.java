@@ -87,8 +87,8 @@ public class SystemAdministrationModule {
                     System.out.println("Access rights set to OPERATIONSMANAGER.");
                     break;
                 case 3:
-                    accessRights = AccessRights.SYSTEMMANAGER;
-                    System.out.println("Access rights set to SYSTEMMANAGER.");
+                    accessRights = AccessRights.SALESMANAGER;
+                    System.out.println("Access rights set to SALESMANAGER.");
                     break;
                 case 4:
                     accessRights = AccessRights.GUESTRELATIONOFFICER;
