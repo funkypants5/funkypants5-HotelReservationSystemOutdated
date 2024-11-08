@@ -5,22 +5,68 @@
 package entity;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-/**
- *
- * @author zchoo
- */
+
 @Entity
 public class RoomEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roomId;
+    
+    @Column(nullable = false)
+    private String roomNumber; // e.g., "2015" for room on floor 20, 15th room
+
+    @ManyToOne
+    @JoinColumn(name = "roomTypeId")
+    private RoomTypeEntity roomType; // Reference to the room's type
+
+    @Column(nullable = false)
+    private String roomStatus; // e.g., "available", "not available"
+
+    public RoomEntity() {
+    }
+
+    public RoomEntity(String roomNumber) {
+        this.roomNumber = roomNumber;
+        this.roomStatus = "Available";
+    }
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public RoomTypeEntity getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(RoomTypeEntity roomType) {
+        this.roomType = roomType;
+    }
+
+    public String getRoomStatus() {
+        return roomStatus;
+    }
+
+    public void setRoomStatusAvailable() {
+        this.roomStatus = "Available";
+    }
+    
+    public void setRoomStatusNotAvailable() {
+        this.roomStatus = "NotAvailable";
+    }
 
     public Long getRoomId() {
         return roomId;
@@ -52,7 +98,9 @@ public class RoomEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.RoomEntity[ id=" + roomId + " ]";
+        return "Room ID: " + roomId + "\n" +
+           "Room Number: " + roomNumber + "\n" +
+           "Room Type: " + roomType.getRoomTypeName() + "\n";
     }
     
 }

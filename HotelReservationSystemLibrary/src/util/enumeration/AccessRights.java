@@ -11,6 +11,6 @@ package util.enumeration;
 public enum AccessRights {
     SYSTEMADMIN,
     OPERATIONMANAGER,
-    SYSTEMMANAGER,
+    SALESMANAGER,
     GUESTRELATIONOFFICER
 }

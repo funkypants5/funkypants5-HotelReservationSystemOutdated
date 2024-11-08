@@ -9,9 +9,9 @@ import javax.ejb.EJB;
 import ejb.session.stateless.EmployeeSessionBeanRemote;
 import ejb.session.stateless.GuestSessionBeanRemote;
 import ejb.session.stateless.PartnerSessionBeanRemote;
-import ejb.session.stateless.RatesSessionBeanRemote;
 import ejb.session.stateless.RoomSessionBeanRemote;
 import ejb.session.stateless.RoomTypeSessionBeanRemote;
+import ejb.session.stateless.RoomRateSessionBeanRemote;
 
 public class Main {
 
@@ -25,7 +25,7 @@ public class Main {
     private static RoomSessionBeanRemote roomSessionBean;
 
     @EJB
-    private static RatesSessionBeanRemote ratesSessionBean;
+    private static RoomRateSessionBeanRemote ratesSessionBean;
 
     @EJB
     private static GuestSessionBeanRemote guestSessionBean;

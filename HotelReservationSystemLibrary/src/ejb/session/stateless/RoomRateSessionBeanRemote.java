@@ -11,6 +11,6 @@ import javax.ejb.Remote;
  * @author zchoo
  */
 @Remote
-public interface RatesSessionBeanRemote {
+public interface RoomRateSessionBeanRemote {
     
 }

@@ -15,7 +15,7 @@ import javax.persistence.Id;
  * @author zchoo
  */
 @Entity
-public class RatesEntity implements Serializable {
+public class RoomRateEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,10 +40,10 @@ public class RatesEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RatesEntity)) {
+        if (!(object instanceof RoomRateEntity)) {
             return false;
         }
-        RatesEntity other = (RatesEntity) object;
+        RoomRateEntity other = (RoomRateEntity) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

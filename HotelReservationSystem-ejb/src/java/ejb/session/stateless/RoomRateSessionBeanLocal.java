@@ -11,6 +11,6 @@ import javax.ejb.Local;
  * @author zchoo
  */
 @Local
-public interface RatesSessionBeanLocal {
+public interface RoomRateSessionBeanLocal {
     
 }

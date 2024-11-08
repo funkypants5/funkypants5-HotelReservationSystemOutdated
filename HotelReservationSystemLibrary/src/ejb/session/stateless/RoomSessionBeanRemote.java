@@ -4,7 +4,10 @@
  */
 package ejb.session.stateless;
 
+import entity.RoomEntity;
+import java.util.List;
 import javax.ejb.Remote;
+import util.exception.RecordNotFoundException;
 
 /**
  *
@@ -12,5 +15,17 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface RoomSessionBeanRemote {
-    
+    public Long createNewRoom(Long roomTypeId, RoomEntity roomEntity) throws RecordNotFoundException;
+
+    public RoomEntity retrieveRoom(String roomNumber) throws RecordNotFoundException;
+
+    public void updateRoomNumber(Long roomId, String newRoomNumber);
+
+    public void updateRoomType(Long roomId, Long newRoomTypeId);
+
+    public void setNotAvilable(Long roomId);
+
+    public void setAvailable(Long roomId);
+
+    public List<RoomEntity> viewAllRoom() throws RecordNotFoundException;
 }

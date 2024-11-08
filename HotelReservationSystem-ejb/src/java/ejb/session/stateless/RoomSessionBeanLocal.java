@@ -4,7 +4,9 @@
  */
 package ejb.session.stateless;
 
+import entity.RoomEntity;
 import javax.ejb.Local;
+import util.exception.RecordNotFoundException;
 
 /**
  *
@@ -12,5 +14,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface RoomSessionBeanLocal {
-    
+    public Long createNewRoom(Long roomTypeId, RoomEntity roomEntity) throws RecordNotFoundException;
 }

@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder.In;
-import util.exception.EmployeeNotFoundException;
+import util.exception.RecordNotFoundException;
 import util.exception.InvalidInputException;
 import util.exception.InvalidLoginCredentialException;
 
@@ -48,19 +48,19 @@ public class EmployeeSessionBean implements EmployeeSessionBeanRemote, EmployeeS
             } else {
                 throw new InvalidLoginCredentialException("Username does not exist or invalid password!");
             }
-        } catch (EmployeeNotFoundException ex) {
+        } catch (RecordNotFoundException ex) {
             throw new InvalidLoginCredentialException("Username does not exist or invalid password!");
         }
     }
 
-    private EmployeeEntity retrieveEmployeeByUsername(String username) throws EmployeeNotFoundException {
+    private EmployeeEntity retrieveEmployeeByUsername(String username) throws RecordNotFoundException {
         Query query = em.createQuery("SELECT e FROM EmployeeEntity e WHERE e.username = :username");
         query.setParameter("username", username);
 
         try {
             return (EmployeeEntity) query.getSingleResult();
         } catch (Exception ex) {
-            throw new EmployeeNotFoundException("Employee Username " + username + " does not exist!");
+            throw new RecordNotFoundException("Employee Username " + username + " does not exist!");
         }
     }
 

@@ -7,7 +7,6 @@ import ejb.session.stateless.BookingSessionBeanRemote;
 import ejb.session.stateless.EmployeeSessionBeanRemote;
 import ejb.session.stateless.GuestSessionBeanRemote;
 import ejb.session.stateless.PartnerSessionBeanRemote;
-import ejb.session.stateless.RatesSessionBeanRemote;
 import ejb.session.stateless.RoomSessionBeanRemote;
 import ejb.session.stateless.RoomTypeSessionBeanRemote;
 import entity.EmployeeEntity;
@@ -16,6 +15,7 @@ import java.util.Scanner;
 import util.enumeration.AccessRights;
 import util.exception.InvalidInputException;
 import util.exception.InvalidLoginCredentialException;
+import ejb.session.stateless.RoomRateSessionBeanRemote;
 
 /**
  *
@@ -24,7 +24,7 @@ import util.exception.InvalidLoginCredentialException;
 public class MainApp {
 
     private RoomSessionBeanRemote roomSessionBeanRemote;
-    private RatesSessionBeanRemote ratesSessionBeanRemote;
+    private RoomRateSessionBeanRemote ratesSessionBeanRemote;
     private GuestSessionBeanRemote guestSessionBeanRemote;
     private BookingSessionBeanRemote bookingSessionBeanRemote;
     private EmployeeSessionBeanRemote employeeSessionBeanRemote;
@@ -32,7 +32,7 @@ public class MainApp {
     private PartnerSessionBeanRemote partnerSessionBeanRemote;
     private EmployeeEntity employee;
 
-    public MainApp(RoomSessionBeanRemote roomSessionBeanRemote, RatesSessionBeanRemote ratesSessionBeanRemote, GuestSessionBeanRemote guestSessionBeanRemote, BookingSessionBeanRemote bookingSessionBeanRemote,
+    public MainApp(RoomSessionBeanRemote roomSessionBeanRemote, RoomRateSessionBeanRemote ratesSessionBeanRemote, GuestSessionBeanRemote guestSessionBeanRemote, BookingSessionBeanRemote bookingSessionBeanRemote,
             EmployeeSessionBeanRemote employeeSessionBeanRemote, RoomTypeSessionBeanRemote roomTypeSessionBeanRemote, PartnerSessionBeanRemote partnerSessionBeanRemote) {
         this.roomSessionBeanRemote = roomSessionBeanRemote;
         this.ratesSessionBeanRemote = ratesSessionBeanRemote;
@@ -113,8 +113,8 @@ public class MainApp {
             FrontOfficeModule module = new FrontOfficeModule(guestSessionBeanRemote, bookingSessionBeanRemote);
             module.runModule();
         }
-        else if (accessright == AccessRights.OPERATIONMANAGER || accessright == AccessRights.SYSTEMMANAGER) {
-            HotelOperationModule module = new HotelOperationModule(roomSessionBeanRemote, ratesSessionBeanRemote, roomTypeSessionBeanRemote);
+        else if (accessright == AccessRights.OPERATIONMANAGER || accessright == AccessRights.SALESMANAGER) {
+            HotelOperationModule module = new HotelOperationModule(roomSessionBeanRemote, ratesSessionBeanRemote, roomTypeSessionBeanRemote, employee);
             module.runModule();
         }
     }
