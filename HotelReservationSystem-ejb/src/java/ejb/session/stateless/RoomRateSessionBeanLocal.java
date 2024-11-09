@@ -4,13 +4,19 @@
  */
 package ejb.session.stateless;
 
+import entity.RoomRateEntity;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
  *
- * @author zchoo
+ * @author admin
  */
 @Local
 public interface RoomRateSessionBeanLocal {
-    
+    Long createRoomRate(RoomRateEntity roomRate);
+    RoomRateEntity retrieveRoomRateById(Long roomRateId);
+    List<RoomRateEntity> retrieveAllRoomRates();
+    void updateRoomRate(RoomRateEntity roomRate);
+    void deleteRoomRate(Long roomRateId);
 }
