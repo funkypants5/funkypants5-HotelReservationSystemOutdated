@@ -5,6 +5,8 @@
 package entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +23,28 @@ public class RoomTypeEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long RoomTypeId;
+    
+    @Column(nullable = false)
+    private String typeName;
+
+    @Column(nullable = false)
+    private BigDecimal baseRate;
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public BigDecimal getBaseRate() {
+        return baseRate;
+    }
+
+    public void setBaseRate(BigDecimal baseRate) {
+        this.baseRate = baseRate;
+    }
 
     public Long getRoomTypeId() {
         return RoomTypeId;

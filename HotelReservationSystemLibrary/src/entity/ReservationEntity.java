@@ -5,10 +5,19 @@
 package entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import util.enumeration.ReservationStatus;
 
 /**
  *
@@ -21,6 +30,85 @@ public class ReservationEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reservationId;
+    
+    @Temporal(TemporalType.DATE)
+    private Date checkInDate;
+    
+    @Temporal(TemporalType.DATE)
+    private Date checkOutDate;
+    
+    @Column(nullable = false)
+    private int numRooms;
+
+    @Column(nullable = false)
+    private BigDecimal totalAmount;
+
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus status; // e.g., RESERVED, CHECKED_IN, CHECKED_OUT
+
+    @ManyToOne(optional = false)
+    private RoomTypeEntity roomType;
+
+    // Constructors, Getters, and Setters
+    public ReservationEntity() {}
+
+    public ReservationEntity(Date checkInDate, Date checkOutDate, int numRooms, BigDecimal totalAmount, RoomTypeEntity roomType) {
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.numRooms = numRooms;
+        this.totalAmount = totalAmount;
+        this.roomType = roomType;
+        this.status = ReservationStatus.RESERVED;
+    }
+
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public Date getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setCheckOutDate(Date checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
+
+    public int getNumRooms() {
+        return numRooms;
+    }
+
+    public void setNumRooms(int numRooms) {
+        this.numRooms = numRooms;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public ReservationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReservationStatus status) {
+        this.status = status;
+    }
+
+    public RoomTypeEntity getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(RoomTypeEntity roomType) {
+        this.roomType = roomType;
+    }
+
 
     public Long getReservationId() {
         return reservationId;

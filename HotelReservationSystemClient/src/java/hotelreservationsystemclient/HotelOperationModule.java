@@ -77,7 +77,7 @@ public void runModule() {
             BigDecimal rateAmount = sc.nextBigDecimal();
 
             System.out.println("Select rate type: ");
-            System.out.println("1: STANDARD");
+            System.out.println("1: NORMAL");
             System.out.println("2: PEAK");
             System.out.println("3: PROMOTION");
             System.out.println("4: WALKIN");
@@ -120,7 +120,7 @@ public void runModule() {
             roomRate.setRate(rateAmount);
 
             System.out.println("Select new rate type: ");
-            System.out.println("1: STANDARD");
+            System.out.println("1: NORMAL");
             System.out.println("2: PEAK");
             System.out.println("3: PROMOTION");
             System.out.println("4: WALKIN");
@@ -162,7 +162,7 @@ public void runModule() {
 
     private RateType mapRateType(int rateTypeOption) {
         switch (rateTypeOption) {
-            case 1: return RateType.STANDARD;
+            case 1: return RateType.NORMAL;
             case 2: return RateType.PEAK;
             case 3: return RateType.PROMOTION;
             case 4: return RateType.WALKIN;

@@ -2,15 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package util.enumeration;
+package util.exception;
 
 /**
  *
  * @author admin
  */
-public enum RateType {
-    NORMAL, 
-    PEAK,
-    PROMOTION,
-    WALKIN
+public class ReservationNotFoundException extends Exception {
+
+    public ReservationNotFoundException() {
+    }
+
+    public ReservationNotFoundException(String msg) {
+        super(msg);
+    }
 }

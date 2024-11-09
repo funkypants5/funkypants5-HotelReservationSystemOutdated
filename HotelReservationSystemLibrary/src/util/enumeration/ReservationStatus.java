@@ -8,9 +8,8 @@ package util.enumeration;
  *
  * @author admin
  */
-public enum RateType {
-    NORMAL, 
-    PEAK,
-    PROMOTION,
-    WALKIN
+public enum ReservationStatus {
+    RESERVED,
+    CHECKED_IN, 
+    CHECKED_OUT
 }
