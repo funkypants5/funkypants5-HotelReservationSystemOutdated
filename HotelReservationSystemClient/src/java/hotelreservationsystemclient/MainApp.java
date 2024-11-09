@@ -8,6 +8,7 @@ import ejb.session.stateless.EmployeeSessionBeanRemote;
 import ejb.session.stateless.GuestSessionBeanRemote;
 import ejb.session.stateless.PartnerSessionBeanRemote;
 import ejb.session.stateless.RatesSessionBeanRemote;
+import ejb.session.stateless.RoomRateSessionBeanRemote;
 import ejb.session.stateless.RoomSessionBeanRemote;
 import ejb.session.stateless.RoomTypeSessionBeanRemote;
 import entity.EmployeeEntity;
@@ -30,10 +31,12 @@ public class MainApp {
     private EmployeeSessionBeanRemote employeeSessionBeanRemote;
     private RoomTypeSessionBeanRemote roomTypeSessionBeanRemote;
     private PartnerSessionBeanRemote partnerSessionBeanRemote;
+    private RoomRateSessionBeanRemote roomRateSessionBeanRemote; 
     private EmployeeEntity employee;
 
     public MainApp(RoomSessionBeanRemote roomSessionBeanRemote, RatesSessionBeanRemote ratesSessionBeanRemote, GuestSessionBeanRemote guestSessionBeanRemote, BookingSessionBeanRemote bookingSessionBeanRemote,
-            EmployeeSessionBeanRemote employeeSessionBeanRemote, RoomTypeSessionBeanRemote roomTypeSessionBeanRemote, PartnerSessionBeanRemote partnerSessionBeanRemote) {
+            EmployeeSessionBeanRemote employeeSessionBeanRemote, RoomTypeSessionBeanRemote roomTypeSessionBeanRemote, PartnerSessionBeanRemote partnerSessionBeanRemote, 
+            RoomRateSessionBeanRemote roomRateSessionBeanRemote) {
         this.roomSessionBeanRemote = roomSessionBeanRemote;
         this.ratesSessionBeanRemote = ratesSessionBeanRemote;
         this.guestSessionBeanRemote = guestSessionBeanRemote;
@@ -41,6 +44,7 @@ public class MainApp {
         this.employeeSessionBeanRemote = employeeSessionBeanRemote;
         this.roomTypeSessionBeanRemote = roomTypeSessionBeanRemote;
         this.partnerSessionBeanRemote = partnerSessionBeanRemote;
+        this.roomRateSessionBeanRemote = roomRateSessionBeanRemote;
     }
 
 
@@ -114,7 +118,7 @@ public class MainApp {
             module.runModule();
         }
         else if (accessright == AccessRights.OPERATIONMANAGER || accessright == AccessRights.SALESMANAGER) {
-            HotelOperationModule module = new HotelOperationModule(roomSessionBeanRemote, ratesSessionBeanRemote, roomTypeSessionBeanRemote);
+            HotelOperationModule module = new HotelOperationModule(roomSessionBeanRemote, ratesSessionBeanRemote, roomTypeSessionBeanRemote, roomRateSessionBeanRemote);
             module.runModule();
         }
     }
