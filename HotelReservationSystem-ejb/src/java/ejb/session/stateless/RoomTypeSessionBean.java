@@ -4,6 +4,7 @@
  */
 package ejb.session.stateless;
 
+import entity.RoomEntity;
 import entity.RoomTypeEntity;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -93,12 +94,34 @@ public class RoomTypeSessionBean implements RoomTypeSessionBeanRemote, RoomTypeS
     @Override
     public RoomTypeEntity retrieveRoomTypeEntityById(Long roomTypeId) throws RecordNotFoundException {
         RoomTypeEntity rt = em.find(RoomTypeEntity.class, roomTypeId);
-        if(rt == null) {
+        if (rt == null) {
             throw new RecordNotFoundException("Room type does not exist");
         }
-        
+
         return rt;
-        
+
+    }
+
+    @Override
+    public String deleteRoomType(Long roomTypeId, Long newRoomTypeId) throws RecordNotFoundException {
+        RoomTypeEntity oldRoomtype = em.find(RoomTypeEntity.class, roomTypeId);
+        if (oldRoomtype == null) {
+            throw new RecordNotFoundException("Old room type does not exist");
+        }
+        RoomTypeEntity newRoomType = em.find(RoomTypeEntity.class, newRoomTypeId);
+        if (newRoomType == null) {
+            throw new RecordNotFoundException("New room type does not exist");
+        }
+        Query query = em.createQuery("SELECT r from RoomEntity r WHERE r.roomType.roomTypeId = :roomTypeId");
+        query.setParameter("roomTypeId", roomTypeId);
+        List<RoomEntity> rooms = query.getResultList();
+        String oldRoomTypeName = oldRoomtype.getRoomTypeName();
+
+        for (RoomEntity room : rooms) {
+            room.setRoomType(newRoomType);
+        }
+        em.remove(oldRoomtype);
+        return oldRoomTypeName;
     }
 
 }

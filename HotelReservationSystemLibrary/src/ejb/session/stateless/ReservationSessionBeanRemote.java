@@ -13,7 +13,7 @@ import javax.ejb.Remote;
  * @author zchoo
  */
 @Remote
-public interface BookingSessionBeanRemote {
+public interface ReservationSessionBeanRemote {
     
     
 }

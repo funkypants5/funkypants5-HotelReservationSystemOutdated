@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
  * @author zchoo
  */
 @Stateless
-public class BookingSessionBean implements BookingSessionBeanRemote, BookingSessionBeanLocal {
+public class ReservationSessionBean implements ReservationSessionBeanRemote, ReservationSessionBeanLocal {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

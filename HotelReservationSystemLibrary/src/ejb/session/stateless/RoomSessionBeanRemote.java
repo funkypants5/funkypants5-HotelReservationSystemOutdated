@@ -28,4 +28,6 @@ public interface RoomSessionBeanRemote {
     public void setAvailable(Long roomId);
 
     public List<RoomEntity> viewAllRoom() throws RecordNotFoundException;
+
+    public Long deleteRoom(String roomNumber) throws RecordNotFoundException;
 }

@@ -4,8 +4,8 @@
  */
 package hotelreservationsystemclient;
 
-import ejb.session.stateless.BookingSessionBeanRemote;
 import ejb.session.stateless.GuestSessionBeanRemote;
+import ejb.session.stateless.ReservationSessionBeanRemote;
 
 /**
  *
@@ -14,13 +14,13 @@ import ejb.session.stateless.GuestSessionBeanRemote;
 public class FrontOfficeModule {
 
     private GuestSessionBeanRemote guestSessionBeanRemote;
-    private BookingSessionBeanRemote bookingSessionBeanRemote;
+    private ReservationSessionBeanRemote reservationSessionBeanRemote;
 
-    public FrontOfficeModule(GuestSessionBeanRemote guestSessionBeanRemote, BookingSessionBeanRemote bookingSessionBeanRemote) {
+    public FrontOfficeModule(GuestSessionBeanRemote guestSessionBeanRemote, ReservationSessionBeanRemote reservationSessionBeanRemote) {
         this.guestSessionBeanRemote = guestSessionBeanRemote;
-        this.bookingSessionBeanRemote = bookingSessionBeanRemote;
+        this.reservationSessionBeanRemote = reservationSessionBeanRemote;
     }
-    
+
     void runModule() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

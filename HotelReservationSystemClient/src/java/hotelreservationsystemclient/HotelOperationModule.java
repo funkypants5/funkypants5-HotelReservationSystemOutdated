@@ -64,10 +64,11 @@ public class HotelOperationModule {
             System.out.println("11: Logout");
             System.out.print("> ");
             response = sc.nextInt();
+            sc.nextLine();
 
             if (response == 1) {
                 createNewRoomType();
-            } else if (response == 2) {;
+            } else if (response == 2) {
                 System.out.print("Please enter room type name: ");
                 String roomTypeName = sc.nextLine();
                 viewRoomTypeDetails(roomTypeName);
@@ -89,8 +90,7 @@ public class HotelOperationModule {
                 viewRoomAllocationExceptionReport();
             } else if (response == 11) {
                 break;
-            }
-            {
+            } else {
                 System.out.println("Invalid input. Please try again.");
             }
         }
@@ -102,11 +102,11 @@ public class HotelOperationModule {
         String roomName = sc.nextLine();
         System.out.print("Please enter room type description (max 255 characters): ");
         String description = sc.nextLine();
-        System.out.print("Please enter room type size: ");
+        System.out.print("Please enter room type size in square meters (please exclude typing in the units): ");
         String roomSize = sc.nextLine();
         System.out.print("Please enter number of beds for each bed type (eg. 1Queen, 2King): ");
         String bed = sc.nextLine();
-        System.out.print("Please enter capacity of room type in square meters (please exclude typing in the units): ");
+        System.out.print("Please enter capacity of room type (max number of occupants): ");
         String capacity = sc.nextLine();
         System.out.print("Please enter ammenities of the room type: ");
         String ammenities = sc.nextLine();
@@ -183,7 +183,18 @@ public class HotelOperationModule {
     }
 
     private void deleteRoomType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+        Scanner sc = new Scanner(System.in);
+        viewAllRoomTypes();
+        System.out.print("Select id of room type for deletion: ");
+        Long roomTypeId = sc.nextLong();
+        System.out.print("Select id of new room type for rooms with the deleted room type: ");
+        Long newRoomTypeId = sc.nextLong();
+        String roomTypeName = roomTypeSessionBeanRemote.deleteRoomType(roomTypeId, newRoomTypeId);
+        System.out.println("\nRoom Type " + roomTypeName + " with id " + roomTypeId + " is deleted! \n");
+        } catch (RecordNotFoundException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        } 
     }
 
     private void viewAllRoomTypes() {
@@ -191,7 +202,8 @@ public class HotelOperationModule {
             List<RoomTypeEntity> roomTypes = roomTypeSessionBeanRemote.viewAllRoomTypes();
             int count = 0;
             for (RoomTypeEntity roomType : roomTypes) {
-                System.out.println(count + " " + roomType);
+                count++;
+                System.out.println(count + ".  " + roomType);
             }
         } catch (RecordNotFoundException ex) {
             System.out.println("Error: " + ex.getMessage());
@@ -235,7 +247,7 @@ public class HotelOperationModule {
             System.out.println("Error: " + ex.getMessage());
         }
 
-        System.out.print("Please select the room detail you wish to update: ");
+        System.out.println("Please select the room detail you wish to update: ");
         System.out.println("1. Room Number");
         System.out.println("2. Room Type");
         System.out.println("3. Room Status");
@@ -251,6 +263,7 @@ public class HotelOperationModule {
                 roomSessionBeanRemote.updateRoomNumber(roomId, newRoomNumber);
                 break;
             case 2:
+                viewAllRoomTypes();
                 System.out.print("Enter new room type ID: ");
                 Long newRoomTypeId = sc.nextLong();
                 roomSessionBeanRemote.updateRoomType(roomId, newRoomTypeId);
@@ -283,19 +296,28 @@ public class HotelOperationModule {
     }
 
     private void deleteRoom() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Enter room number for deletion: ");
+            String roomNumber = sc.nextLine().trim();
+            Long roomId = roomSessionBeanRemote.deleteRoom(roomNumber);
+            System.out.println("\nRoom number: " + roomNumber + " with room id: " + roomId + " deleted! \n");
+        } catch (RecordNotFoundException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+
     }
 
     private void viewAllRooms() {
         int count = 0;
-        try{
-        List<RoomEntity> rooms = roomSessionBeanRemote.viewAllRoom();
-        System.out.println("List of all rooms: ");
-        for(RoomEntity room : rooms) {
-            count++;
-            System.out.println(count + " " + room);
-        } 
-        } catch(RecordNotFoundException ex) {
+        try {
+            List<RoomEntity> rooms = roomSessionBeanRemote.viewAllRoom();
+            System.out.println("List of all rooms: ");
+            for (RoomEntity room : rooms) {
+                count++;
+                System.out.println(count + " " + room);
+            }
+        } catch (RecordNotFoundException ex) {
             System.out.println("Error: " + ex.getMessage());
         }
     }

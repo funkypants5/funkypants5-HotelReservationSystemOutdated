@@ -74,12 +74,22 @@ public class RoomSessionBean implements RoomSessionBeanRemote, RoomSessionBeanLo
 
     @Override
     public List<RoomEntity> viewAllRoom() throws RecordNotFoundException {
-       Query query = em.createQuery("SELECT r FROM RoomEntity r");
-       if (query == null) {
-           throw new RecordNotFoundException("No rooms found ");
-       }
-       return query.getResultList();
+        Query query = em.createQuery("SELECT r FROM RoomEntity r");
+        if (query == null) {
+            throw new RecordNotFoundException("No rooms found ");
+        }
+        return query.getResultList();
     }
 
+    @Override
+    public Long deleteRoom(String roomNumber) throws RecordNotFoundException {
+        RoomEntity room = retrieveRoom(roomNumber);
+        if (room == null) {
+            throw new RecordNotFoundException("Room for deletion is not found!");
+        }
+        Long roomId = room.getRoomId();
+        em.remove(room);
+        return roomId;
+    }
 
 }

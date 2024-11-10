@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package hotelreservationsystemclient;
-import ejb.session.stateless.BookingSessionBeanRemote;
 import ejb.session.stateless.EmployeeSessionBeanRemote;
 import ejb.session.stateless.GuestSessionBeanRemote;
 import ejb.session.stateless.PartnerSessionBeanRemote;
@@ -16,6 +15,7 @@ import util.enumeration.AccessRights;
 import util.exception.InvalidInputException;
 import util.exception.InvalidLoginCredentialException;
 import ejb.session.stateless.RoomRateSessionBeanRemote;
+import ejb.session.stateless.ReservationSessionBeanRemote;
 
 /**
  *
@@ -26,13 +26,13 @@ public class MainApp {
     private RoomSessionBeanRemote roomSessionBeanRemote;
     private RoomRateSessionBeanRemote ratesSessionBeanRemote;
     private GuestSessionBeanRemote guestSessionBeanRemote;
-    private BookingSessionBeanRemote bookingSessionBeanRemote;
+    private ReservationSessionBeanRemote bookingSessionBeanRemote;
     private EmployeeSessionBeanRemote employeeSessionBeanRemote;
     private RoomTypeSessionBeanRemote roomTypeSessionBeanRemote;
     private PartnerSessionBeanRemote partnerSessionBeanRemote;
     private EmployeeEntity employee;
 
-    public MainApp(RoomSessionBeanRemote roomSessionBeanRemote, RoomRateSessionBeanRemote ratesSessionBeanRemote, GuestSessionBeanRemote guestSessionBeanRemote, BookingSessionBeanRemote bookingSessionBeanRemote,
+    public MainApp(RoomSessionBeanRemote roomSessionBeanRemote, RoomRateSessionBeanRemote ratesSessionBeanRemote, GuestSessionBeanRemote guestSessionBeanRemote, ReservationSessionBeanRemote bookingSessionBeanRemote,
             EmployeeSessionBeanRemote employeeSessionBeanRemote, RoomTypeSessionBeanRemote roomTypeSessionBeanRemote, PartnerSessionBeanRemote partnerSessionBeanRemote) {
         this.roomSessionBeanRemote = roomSessionBeanRemote;
         this.ratesSessionBeanRemote = ratesSessionBeanRemote;

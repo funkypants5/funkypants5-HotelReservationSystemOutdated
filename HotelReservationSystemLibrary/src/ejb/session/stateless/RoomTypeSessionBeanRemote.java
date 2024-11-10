@@ -34,7 +34,9 @@ public interface RoomTypeSessionBeanRemote {
 
     public void updateRoomTypeSize(Long roomTypeId, String newSize);
 
-    public RoomTypeEntity retrieveRoomTypeEntityById (Long roomTypeId) throws RecordNotFoundException ;
+    public RoomTypeEntity retrieveRoomTypeEntityById (Long roomTypeId) throws RecordNotFoundException;
+
+    public String deleteRoomType(Long roomTypeId, Long newRoomTypeId) throws RecordNotFoundException;
 
     
 
